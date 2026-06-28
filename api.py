@@ -39,4 +39,20 @@ signed = wallet.sign_transaction(
 )
 
 record["signature"] = len(
-    s
+    signed.raw_transaction.hex()
+)
+
+Path(
+    "api_state.json"
+).write_text(
+    json.dumps(
+        record,
+        indent=2
+    )
+)
+
+for value in record.values():
+    print(value)
+
+print(wallet.address)
+print("Saved")
